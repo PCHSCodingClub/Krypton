@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-	<title>Master</title>
+	<title>BOOG</title>
 </head>
 <body>
-<div id="container">
-<form runat="server">
-    <asp:ContentPlaceHolder id="contentPlaceHolder" runat="server" /> 
-</form>
-</div>
+	<div id="container">
+		<form runat="server">
+		    <asp:ContentPlaceHolder id="contentPlaceHolder" runat="server" /> 
+		</form>
+	</div>
 </body>
 </html>

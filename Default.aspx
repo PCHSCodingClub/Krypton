@@ -11,7 +11,7 @@
 			div.content{
 				background-color:#EEEEDD;
 				margin: auto;
-				width: 1400px;
+				width: 1200px;
 				hiegt: auto;
 				text-align: center;
 			}
@@ -23,55 +23,61 @@
 				background-color: #DDDDEE;
 				width: 520px;
 				height: 170px;
-				margin-left: 175px;
+				margin-left: 75px;
 			}
 			div.finalCard{
 				background-color: #DDDDEE;
 				width: 520px;
 				height: 170px;
-				margin-left: 705px;
+				margin-left: 605px;
 				margin-top: -186px;
-				margin-bottom: 186px;
+				margin-bottom: 86px;
 			}
 			div.card{
 				color: #FFFFFF;
-				background-color:#000044
+				background-color:#000044;
+				margin-bottom: 5px;
+				width: 60px;
+				margin-left: auto;
+				margin-right: auto;
 			}
 	</style>
 </head>
 <body>
 	<div class = "content">
-		<br/>
-		<p class = "header"><strong>Welcome to Krypton</strong></p>
-		<br/>
-		<br/>
-		<br/>
-		<div class = "problemCards">
-			<p>Arrange these numbers</p>
-			<div class = "card">
-				<asp:Label id = "card1" runat="server"/>
-			</div>
-			<div class = "card">
-				<asp:Label id = "card2" runat="server"/>
-			</div>
-			<div class = "card">
-				<asp:Label id = "card3" runat="server"/>
-			</div>
-			<div class = "card">
-				<asp:Label id = "card4" runat="server"/>
-			</div>
-			<div class = "card">
-				<asp:Label id = "card5" runat="server"/>
-			</div>
-		</div>
-		<div class = "finalCard">
-			<p>To equal this number</p>
-			<div class = "card">
-				<asp:Label id = "card6" runat="server"/>
-			</div>
-		</div>
 		<form id="form1" runat="server">
-			<asp:Button id="button1" runat="server" Text="New Cards!" OnClick="generateCards" />
+			<br/>
+			<p class = "header"><strong>Welcome to Krypton</strong></p>
+			<br/>
+			<br/>
+			<br/>
+			<div class = "problemCards">
+				<p>Arrange these numbers</p>
+				<div class = "card">
+					<asp:Label id = "card1" runat="server" CssClass = "card"/>
+				</div>
+				<div class = "card">
+					<asp:Label id = "card2" runat="server" CssClass = "card"/>
+				</div>
+				<div class = "card">
+					<asp:Label id = "card3" runat="server" CssClass = "card"/>
+				</div>
+				<div class = "card">
+					<asp:Label id = "card4" runat="server" CssClass = "card"/>
+				</div>
+				<div class = "card">
+					<asp:Label id = "card5" runat="server" CssClass = "card"/>
+				</div>
+			</div>
+			<div class = "finalCard">
+				<p>To equal this number</p>
+				<div class = "card">
+					<asp:Label id = "card6" runat="server" CssClass = "card"/>
+				</div>
+			</div>
+			<asp:Button id="newCardsButton" runat="server" Text="New Cards!" OnClick="generateCards" />
+			<asp:TextBox id = "answerBox" runat="server"/>
+			<asp:Button id="checkCardsButton" runat="server" Text = "Check Cards!" OnClick="checkCards"/>
 		</form>
 	</div>
 </body>

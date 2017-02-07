@@ -12,7 +12,7 @@
 				background-color:#EEEEDD;
 				margin: auto;
 				width: 1200px;
-				hiegt: auto;
+				height: auto;
 				text-align: center;
 			}
 			p.header{

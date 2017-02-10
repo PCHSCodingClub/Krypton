@@ -1,6 +1,4 @@
 using System;
-using System.Web;
-using System.Web.UI;
 using System.Collections;
 
 namespace Krypton
@@ -14,14 +12,15 @@ namespace Krypton
 		ArrayList openP = new ArrayList();
 		ArrayList closeP = new ArrayList();
 		ArrayList pairList = new ArrayList();
-		ArrayList answerParts = new ArrayList();
+		//Expression e = new Expression();
 
 		String answer;
 
 		public void generateCards(object sender, EventArgs args)
 		{
-			for (int i = 0; i < cards.Length; i++) {
-				cards[i] = (1+rand.Next(24));
+			for (int i = 0; i < cards.Length; i++)
+			{
+				cards[i] = (1 + rand.Next(24));
 			}
 			card1.Text = cards[0].ToString();
 			card2.Text = cards[1].ToString();
@@ -31,20 +30,32 @@ namespace Krypton
 			card6.Text = cards[5].ToString();
 		}
 
-		public void checkCards(object sender, EventArgs ars) {
+		public void checkCards(object sender, EventArgs ars)
+		{
 			answer = answerBox.Text;
 			splitString(answer);
 		}
 
-		public void splitString(String s){
+		public void splitString(String s)
+		{
 			char[] c = s.ToCharArray();
 
-			for (int i = 0; i < c.Length; i++) {
-				if (c[i] == '(') {
+			for (int i = c.Length; i > 0; i--)
+			{
+				if (c[i] == '(')
+				{
 					openP.Add(i);
-				}
-				else if (c[i] == ')'){
-					closeP.Add(i);
+					Boolean end = false;
+					int j = i;
+					while (!end) {
+						if (c[j] == ')') {
+							closeP.Add(j);
+							end = true;
+						}
+						else {
+							j++;
+						}
+					}
 				}
 			}
 
@@ -52,16 +63,20 @@ namespace Krypton
 			doMath(pairList);
 		}
 
-		public void findPairs(ArrayList o, ArrayList p) {
+		public void findPairs(ArrayList o, ArrayList p)
+		{
 			int a;
 			int b;
 
-			if (!(o.Count == p.Count)) {
+			if (!(o.Count == p.Count))
+			{
 				return;
 			}
-			for (int i = 0; i < o.Count; i++) {
+			for (int i = 0; i < o.Count; i++)
+			{
 				b = (int)p[i];
-				do{
+				do
+				{
 					a = (int)o[(o.Count - i - 1)];
 				} while (a > b);
 				NumberPair pr = new NumberPair(a, b);
@@ -69,10 +84,12 @@ namespace Krypton
 			}
 		}
 
-		public void doMath(ArrayList a) {
+		public void doMath(ArrayList a)
+		{
 			ArrayList strAry = new ArrayList();
-			for (int i = 0; i < a.Count; i++) {
-				NumberPair pr = (NumberPair) a[i];
+			for (int i = 0; i < a.Count; i++)
+			{
+				NumberPair pr = (NumberPair)a[i];
 				strAry.Add(answer.Substring(pr.getStart(), pr.getEnd()));
 			}
 		}

@@ -12,7 +12,8 @@ namespace Krypton
 		ArrayList openP = new ArrayList();
 		ArrayList closeP = new ArrayList();
 		ArrayList pairList = new ArrayList();
-		//Expression e = new Expression();
+		ArrayList numbers = new ArrayList();
+		ArrayList comands = new ArrayList();
 
 		String answer;
 
@@ -40,16 +41,19 @@ namespace Krypton
 		{
 			char[] c = s.ToCharArray();
 
-			for (int i = c.Length; i > 0; i--)
+			for (int i = (c.Length-1); i > 0; i--)
 			{
 				if (c[i] == '(')
 				{
 					openP.Add(i);
-					Boolean end = false;
+					Boolean end = true;
 					int j = i;
 					while (!end) {
 						if (c[j] == ')') {
 							closeP.Add(j);
+							end = true;
+						}
+						else if (j >= (c.Length-1)) {
 							end = true;
 						}
 						else {
@@ -57,6 +61,20 @@ namespace Krypton
 						}
 					}
 				}
+			}
+			for (int i = 0; i < c.Length; i++)
+			{
+				char ch = c[i];
+				if (ch == '+')
+					comands.Add(0);
+				if (ch == '-')
+					comands.Add(1);
+				if (ch == '*')
+					comands.Add(2);
+				if (ch == '/')
+					comands.Add(3);
+				if (ch == '^')
+					comands.Add(4);
 			}
 
 			findPairs(openP, closeP);
@@ -66,13 +84,13 @@ namespace Krypton
 		public void findPairs(ArrayList o, ArrayList c)
 		{
 
-			if (!(o.Count == p.Count))
+			if (!(o.Count == c.Count))
 			{
 				return;
 			}
 			for (int i = 0; i < o.Count; i++)
 			{
-				NumberPair pr = new NumberPair(o[i], p[i]);
+				NumberPair pr = new NumberPair((int) o[i], (int) c[i]);
 				pairList.Add(pr);
 			}
 		}
@@ -84,6 +102,7 @@ namespace Krypton
 			{
 				NumberPair pr = (NumberPair)a[i];
 				strAry.Add(answer.Substring(pr.getStart(), pr.getEnd()));
+				answerBox.Text = (String) strAry[i];
 			}
 		}
 	}

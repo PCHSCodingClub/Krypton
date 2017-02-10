@@ -63,10 +63,8 @@ namespace Krypton
 			doMath(pairList);
 		}
 
-		public void findPairs(ArrayList o, ArrayList p)
+		public void findPairs(ArrayList o, ArrayList c)
 		{
-			int a;
-			int b;
 
 			if (!(o.Count == p.Count))
 			{
@@ -74,12 +72,7 @@ namespace Krypton
 			}
 			for (int i = 0; i < o.Count; i++)
 			{
-				b = (int)p[i];
-				do
-				{
-					a = (int)o[(o.Count - i - 1)];
-				} while (a > b);
-				NumberPair pr = new NumberPair(a, b);
+				NumberPair pr = new NumberPair(o[i], p[i]);
 				pairList.Add(pr);
 			}
 		}

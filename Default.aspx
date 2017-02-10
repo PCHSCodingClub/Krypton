@@ -5,33 +5,39 @@
 	<title>Krypton</title>
 	<style>
 			body{
-				background-color:#CC0000;
+				background-color: #CC0000;
+				height: 100%;
+				width: 100%;
+				padding: 0px;
+				margin: 0px;
 			}
-			
 			div.content{
-				background-color:#EEEEDD;
-				margin: auto;
-				width: 1200px;
-				height: auto;
+				position: absolute;
+				background-color:#FFFFDD;
+				left: 5%;
+				top:5%;
+				width: 90%;
+				height: 90%;
 				text-align: center;
+				border-radius: 50px;
 			}
 			p.header{
 				color: #000099;
 				font-size: 72px;
 			}
 			div.problemCards{
-				background-color: #DDDDEE;
-				width: 520px;
-				height: 170px;
-				margin-left: 75px;
+				position: absolute;
+				background-color: #BBBBFF;
+				width: 40%;
+				height: 35%;
+				left: 8%;
 			}
 			div.finalCard{
-				background-color: #DDDDEE;
-				width: 520px;
-				height: 170px;
-				margin-left: 605px;
-				margin-top: -186px;
-				margin-bottom: 86px;
+				position: absolute;
+				background-color: #BBBBFF;
+				width: 40%;
+				height: 35%;
+				right: 8%;
 			}
 			div.card{
 				color: #FFFFFF;
@@ -41,16 +47,32 @@
 				margin-left: auto;
 				margin-right: auto;
 			}
+			.newCardsButton{
+				position: absolute;
+				bottom: 1%;
+				left: 30%;
+				width: 10%;
+			}
+			.answerBox{
+				position: absolute;
+				bottom: 1%;
+				margin: auto;
+				left: 45%;
+				width: 10%;
+			}
+			.checkCardsButton{
+				position: absolute;
+				bottom: 1%;
+				margin: auto;
+				left: 60%;
+				width: 10%;
+			}
 	</style>
 </head>
 <body>
-	<div class = "content">
-		<form id="form1" runat="server">
-			<br/>
+	<form id="form1" runat="server">
+		<div class = "content">
 			<p class = "header"><strong>Welcome to Krypton</strong></p>
-			<br/>
-			<br/>
-			<br/>
 			<div class = "problemCards">
 				<p>Arrange these numbers</p>
 				<div class = "card">
@@ -75,10 +97,10 @@
 					<asp:Label id = "card6" runat="server" CssClass = "card"/>
 				</div>
 			</div>
-			<asp:Button id="newCardsButton" runat="server" Text="New Cards!" OnClick="generateCards" />
-			<asp:TextBox id = "answerBox" runat="server"/>
-			<asp:Button id="checkCardsButton" runat="server" Text = "Check Cards!" OnClick="checkCards"/>
-		</form>
-	</div>
+			<asp:Button id="newCardsButton" CssClass="newCardsButton" runat="server" Text="New Cards!" OnClick="generateCards" />
+			<asp:TextBox id="answerBox" CssClass="answerBox" runat="server"/>
+			<asp:Button id="checkCardsButton" CssClass="checkCardsButton" runat="server" Text = "Check Cards!" OnClick="checkCards"/>
+		</div>
+	</form>
 </body>
 </html>

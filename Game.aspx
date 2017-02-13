@@ -60,6 +60,13 @@
 				left: 45%;
 				width: 10%;
 			}
+			.label{
+				position: absolute;
+				bottom: 15%;
+				margin: auto;
+				left: 45%;
+				width: 10%;
+			}
 			.checkCardsButton{
 				position: absolute;
 				bottom: 1%;
@@ -97,6 +104,7 @@
 					<asp:Label id = "card6" runat="server" CssClass = "card"/>
 				</div>
 			</div>
+			<asp:Label id = "label" runat="server"  CssClass="label" Text="ERROR: invalid answer"/>
 			<asp:Button id="newCardsButton" CssClass="newCardsButton" runat="server" Text="New Cards!" OnClick="generateCards" />
 			<asp:TextBox id="answerBox" CssClass="answerBox" runat="server"/>
 			<asp:Button id="checkCardsButton" CssClass="checkCardsButton" runat="server" Text = "Check Cards!" OnClick="checkCards"/>

@@ -104,7 +104,7 @@
 					<asp:Label id = "card6" runat="server" CssClass = "card"/>
 				</div>
 			</div>
-			<asp:Label id = "label" runat="server"  CssClass="label" Text="ERROR: invalid answer"/>
+			<asp:Label id = "label" runat="server"  CssClass="label" Text=""/>
 			<asp:Button id="newCardsButton" CssClass="newCardsButton" runat="server" Text="New Cards!" OnClick="generateCards" />
 			<asp:TextBox id="answerBox" CssClass="answerBox" runat="server"/>
 			<asp:Button id="checkCardsButton" CssClass="checkCardsButton" runat="server" Text = "Check Cards!" OnClick="checkCards"/>

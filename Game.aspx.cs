@@ -45,7 +45,9 @@ namespace Krypton
 				answerBox.Text = computedAnswer.ToString();
 			}
 
-
+			if (computedAnswer == -1) {
+				answerBox.Text = "ERROR INVALID ANSWER"
+			}
 		}
 
 		public void checkNums(String s)

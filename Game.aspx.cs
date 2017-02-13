@@ -38,15 +38,21 @@ namespace Krypton
 			try
 			{
 				computedAnswer = (int)dt.Compute(answer, "");
-				answerBox.Text = computedAnswer.ToString();
 			}
 			catch {
 				computedAnswer = -1;
-				answerBox.Text = computedAnswer.ToString();
 			}
 
-			if (computedAnswer == -1) {
-				answerBox.Text = "ERROR INVALID ANSWER"
+			if (computedAnswer == -1)
+			{
+				label.Text = "ERROR INVALID ANSWER";
+			}
+			else if (computedAnswer != cards[5])
+			{
+				label.Text = "Answer Does not match";
+			}
+			else{
+				label.Text = cards[5].ToString();
 			}
 		}
 

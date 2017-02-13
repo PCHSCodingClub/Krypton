@@ -1,21 +1,20 @@
 using System;
 using System.Collections;
+using System.Data;
 
 namespace Krypton
 {
 
 	public partial class Default : System.Web.UI.Page
 	{
+		DataTable dt = new DataTable();
 		Random rand = new Random();
 
 		int[] cards = new int[6];
-		ArrayList openP = new ArrayList();
-		ArrayList closeP = new ArrayList();
-		ArrayList pairList = new ArrayList();
-		ArrayList numbers = new ArrayList();
-		ArrayList comands = new ArrayList();
 
 		String answer;
+		int computedAnswer;
+		Boolean canGetPoints = false;
 
 		public void generateCards(object sender, EventArgs args)
 		{
@@ -29,81 +28,48 @@ namespace Krypton
 			card4.Text = cards[3].ToString();
 			card5.Text = cards[4].ToString();
 			card6.Text = cards[5].ToString();
+
+			canGetPoints = true;
 		}
 
 		public void checkCards(object sender, EventArgs ars)
 		{
 			answer = answerBox.Text;
-			splitString(answer);
+			try
+			{
+				computedAnswer = (int)dt.Compute(answer, "");
+				answerBox.Text = computedAnswer.ToString();
+			}
+			catch {
+				computedAnswer = -1;
+				answerBox.Text = computedAnswer.ToString();
+			}
+
+
 		}
 
-		public void splitString(String s)
+		public void checkNums(String s)
 		{
 			char[] c = s.ToCharArray();
 
-			for (int i = (c.Length-1); i > 0; i--)
-			{
-				if (c[i] == '(')
-				{
-					openP.Add(i);
-					Boolean end = true;
-					int j = i;
-					while (!end) {
-						if (c[j] == ')') {
-							closeP.Add(j);
-							end = true;
-						}
-						else if (j >= (c.Length-1)) {
-							end = true;
-						}
-						else {
-							j++;
-						}
-					}
-				}
-			}
 			for (int i = 0; i < c.Length; i++)
 			{
 				char ch = c[i];
-				if (ch == '+')
-					comands.Add(0);
-				if (ch == '-')
-					comands.Add(1);
-				if (ch == '*')
-					comands.Add(2);
-				if (ch == '/')
-					comands.Add(3);
-				if (ch == '^')
-					comands.Add(4);
+				if (isNumber(ch)) {
+					
+				}
 			}
-
-			findPairs(openP, closeP);
-			doMath(pairList);
 		}
 
-		public void findPairs(ArrayList o, ArrayList c)
+		public Boolean isNumber(char c)
 		{
-
-			if (!(o.Count == c.Count))
+			if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')
 			{
-				return;
+				return true;
 			}
-			for (int i = 0; i < o.Count; i++)
-			{
-				NumberPair pr = new NumberPair((int) o[i], (int) c[i]);
-				pairList.Add(pr);
+			else {
+				return false;
 			}
-		}
-
-		public void doMath(ArrayList a)
-		{
-			ArrayList strAry = new ArrayList();
-			for (int i = 0; i < a.Count; i++)
-			{
-				NumberPair pr = (NumberPair)a[i];
-				strAry.Add(answer.Substring(pr.getStart(), pr.getEnd()));
-				answerBox.Text = (String) strAry[i];
-			}
-		}
+		}	
 	}
 }

@@ -8,6 +8,7 @@ namespace Krypton
 	public partial class Default : System.Web.UI.Page
 	{
 		DataTable dt = new DataTable();
+		//Data cardData = new DataSet();
 		Random rand = new Random();
 
 		int[] cards = new int[6];
@@ -29,7 +30,9 @@ namespace Krypton
 			card5.Text = cards[4].ToString();
 			card6.Text = cards[5].ToString();
 
+
 			canGetPoints = true;
+			ViewState.Add("cards", cards);
 		}
 
 		public void checkCards(object sender, EventArgs ars)
@@ -47,12 +50,12 @@ namespace Krypton
 			{
 				label.Text = "ERROR INVALID ANSWER";
 			}
-			else if (computedAnswer != cards[5])
+			else if (computedAnswer != ((int[])ViewState["cards"])[5])
 			{
 				label.Text = "Answer Does not match";
 			}
 			else{
-				label.Text = cards[5].ToString();
+				label.Text = (((int[])ViewState["cards"])[5]).ToString();
 			}
 		}
 

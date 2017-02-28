@@ -61,28 +61,18 @@ namespace Krypton
 			}
 		}
 
-		public void checkNums(String s)								//not uesed (yet) ignore
+		public Boolean contains(string a, int[] c)								//not uesed (yet) ignore
 		{
-			char[] c = s.ToCharArray();
+			char[] chars = a.ToCharArray();
+			int length = (c.Length - 2);
 
-			for (int i = 0; i < c.Length; i++)
-			{
-				char ch = c[i];
-				if (isNumber(ch)) {
+			for (int i = 0; i < length; i++) {
+				int n = c[i];
+				if (a.Contains(n.ToString())) {
 					
 				}
 			}
+			return true;
 		}
-
-		public Boolean isNumber(char c)
-		{
-			if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')
-			{
-				return true;
-			}
-			else {
-				return false;
-			}
-		}	
 	}
 }

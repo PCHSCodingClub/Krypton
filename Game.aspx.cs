@@ -14,7 +14,7 @@ namespace Krypton
 
 		String answer;								//the computed answer as a string (used later)
 		int computedAnswer;							//the computed answer
-		Boolean canGetPoints = false;
+		Boolean canGetPoints = false;				//makes sure that a player cannot get double points
 
 		public void generateCards(object sender, EventArgs args)	//randomly generates 
 		{
@@ -30,24 +30,27 @@ namespace Krypton
 			card6.Text = cards[5].ToString();
 
 
-			canGetPoints = true;
-			ViewState.Add("cards", cards);
+			canGetPoints = true;									//allows points to be obtained again.
+			ViewState.Add("cards", cards);							//stores data
 		}
 
-		public void checkCards(object sender, EventArgs ars)
+		public void checkCards(object sender, EventArgs ars)		//checks if cards are right
 		{
-			answer = answerBox.Text;
+			answer = answerBox.Text;								//finds what is in the box
 			try
 			{
-				computedAnswer = (int)dt.Compute(answer, "");
+				computedAnswer = (int)dt.Compute(answer, "");		//turns it into an int
 			}
 			catch {
 				computedAnswer = -1;
 			}
 
-			if (computedAnswer == -1)
+			if (computedAnswer == -1)								//checks if answer is correct
 			{
 				label.Text = "ERROR INVALID ANSWER";
+			}
+			else if (!canGetPoints) {
+				label.Text = "Generate new cards";
 			}
 			else if (computedAnswer != ((int[])ViewState["cards"])[5])
 			{
@@ -58,7 +61,7 @@ namespace Krypton
 			}
 		}
 
-		public void checkNums(String s)
+		public void checkNums(String s)								//not uesed (yet) ignore
 		{
 			char[] c = s.ToCharArray();
 

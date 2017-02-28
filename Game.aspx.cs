@@ -61,7 +61,7 @@ namespace Krypton
 			}
 		}
 
-		public Boolean contains(string a, int[] c)								//not uesed (yet) ignore
+		public Boolean contains(string a, int[] c)								//not used (yet) ignore
 		{
 			char[] chars = a.ToCharArray();
 			int length = (c.Length - 2);

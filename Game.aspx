@@ -5,7 +5,7 @@
 	<title>Krypton</title>
 	<style>
 			body{
-				background-color: #CC0000;
+				background-color: #DD0000;
 				height: 100%;
 				width: 100%;
 				padding: 0px;
@@ -13,7 +13,7 @@
 			}
 			div.content{
 				position: absolute;
-				background-color:#FFFFDD;
+				background-color:#FFFF88;
 				left: 5%;
 				top:5%;
 				width: 90%;
@@ -22,26 +22,30 @@
 				border-radius: 50px;
 			}
 			p.header{
-				color: #000099;
+				color: #0000AF;
 				font-size: 72px;
 			}
 			div.problemCards{
+				font-weight: bold;
 				position: absolute;
-				background-color: #BBBBFF;
+				background-color: #8989FF;
+				font-size: 18px;
 				width: 40%;
 				height: 35%;
 				left: 8%;
 			}
 			div.finalCard{
+				font-weight: bold;
 				position: absolute;
-				background-color: #BBBBFF;
+				background-color: #8989FF;
+				font-size: 18px;
 				width: 40%;
 				height: 35%;
 				right: 8%;
 			}
 			div.card{
-				color: #FFFFFF;
-				background-color:#000044;
+				color: lavender;
+				background-color:#000033;
 				margin-bottom: 5px;
 				width: 60px;
 				margin-left: auto;

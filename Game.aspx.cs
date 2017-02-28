@@ -7,23 +7,22 @@ namespace Krypton
 
 	public partial class Default : System.Web.UI.Page
 	{
-		DataTable dt = new DataTable();
-		//Data cardData = new DataSet();
-		Random rand = new Random();
+		DataTable dt = new DataTable();				//used to turn equations into ints
+		Random rand = new Random();					//generates random numbers
 
-		int[] cards = new int[6];
+		int[] cards = new int[6];					//stores the numbers used by cards
 
-		String answer;
-		int computedAnswer;
+		String answer;								//the computed answer as a string (used later)
+		int computedAnswer;							//the computed answer
 		Boolean canGetPoints = false;
 
-		public void generateCards(object sender, EventArgs args)
+		public void generateCards(object sender, EventArgs args)	//randomly generates 
 		{
-			for (int i = 0; i < cards.Length; i++)
+			for (int i = 0; i < cards.Length; i++)					//makes a random number for each card
 			{
 				cards[i] = (1 + rand.Next(24));
 			}
-			card1.Text = cards[0].ToString();
+			card1.Text = cards[0].ToString();						//puts the cards onto the page.
 			card2.Text = cards[1].ToString();
 			card3.Text = cards[2].ToString();
 			card4.Text = cards[3].ToString();

@@ -14,7 +14,6 @@ namespace Krypton
 
 		String answer;								//the computed answer as a string (used later)
 		int computedAnswer;							//the computed answer
-		Boolean canGetPoints = false;				//makes sure that a player cannot get double points
 
 		public void generateCards(object sender, EventArgs args)	//randomly generates 
 		{
@@ -30,13 +29,15 @@ namespace Krypton
 			card6.Text = cards[5].ToString();
 
 
-			canGetPoints = true;									//allows points to be obtained again.
+			ViewState.Add("canGetCards", true);									//allows points to be obtained again.
 			ViewState.Add("cards", cards);							//stores data
 		}
 
 		public void checkCards(object sender, EventArgs ars)		//checks if cards are right
 		{
-			answer = answerBox.Text;								//finds what is in the box
+			answer = answerBox.Text;                                //finds what is in the box
+			int[] c = (int[])ViewState["cards"];					//gets the cards out of the view
+			int a = c[5];											//finds the answer card's value
 			try
 			{
 				computedAnswer = (int)dt.Compute(answer, "");		//turns it into an int
@@ -44,35 +45,68 @@ namespace Krypton
 			catch {
 				computedAnswer = -1;
 			}
-
-			if (computedAnswer == -1)								//checks if answer is correct
+			if ((Boolean)ViewState["canGetCards"])
 			{
-				label.Text = "ERROR INVALID ANSWER";
+				if (computedAnswer == -1)                               //checks if answer is correct
+				{
+					label.Text = "ERROR INVALID ANSWER";
+				}
+				else if (computedAnswer != a)
+				{
+					label.Text = "Answer Does not match";
+				}
+				else if (contains(answer, c))
+				{
+					label.Text = "Correct";
+					ViewState.Add("canGetCards", false);
+				}
+				else{
+					label.Text = "You did not use the cards correctly";
+				}
 			}
-			else if (!canGetPoints) {
-				label.Text = "Generate new cards";
-			}
-			else if (computedAnswer != ((int[])ViewState["cards"])[5])
-			{
-				label.Text = "Answer Does not match";
-			}
-			else{
-				label.Text = (((int[])ViewState["cards"])[5]).ToString();
+			else {
+				label.Text = "Please Generate New Cards";
 			}
 		}
 
-		public Boolean contains(string a, int[] c)								//not used (yet) ignore
+		public bool contains(string a, int[] c)								//not used (yet) ignore
 		{
-			char[] chars = a.ToCharArray();
 			int length = (c.Length - 2);
 
 			for (int i = 0; i < length; i++) {
 				int n = c[i];
-				if (a.Contains(n.ToString())) {
-					
+				if (containsNumber(a,n.ToString()))
+				{
+					continue;
+				}
+				else{
+					return false;
 				}
 			}
 			return true;
+		}
+
+		public bool containsNumber(string big, string small) {
+			if (big.Contains(small)) {
+				int s = big.IndexOf(small) - 1;
+				int e = s + small.Length;
+
+				if (!isNumber(big.Substring(s, s + 1)) && !isNumber(big.Substring(s, e + 1))){
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public bool isNumber(String s) {
+			if (s.Length > 1) {
+				return false;
+			}
+			char[] ch = s.ToCharArray();
+			if (ch[0] == '0' || ch[0] == '1' || ch[0] == '2' || ch[0] == '3' || ch[0] == '4' || ch[0] == '5' || ch[0] == '6' || ch[0] == '7' || ch[0] == '8' || ch[0] == '9') {
+				return true;
+			}
+			return false;
 		}
 	}
 }

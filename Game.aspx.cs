@@ -99,7 +99,7 @@ namespace Krypton
 		}
 
 		public bool isNumber(String s) {
-			if (s.Length > 1) {
+			if (s.Length != 1) {
 				return false;
 			}
 			char[] ch = s.ToCharArray();

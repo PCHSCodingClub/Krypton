@@ -54,10 +54,12 @@
 <body>
 	<form id="form1" runat="server">
 		<div class="ID">
-			<p>Choose Your Identification</p>
+			<asp:Label runat="server" id="IDLabel" CssClass="IDLabel" Text="Identification"></asp:Label>
 		</div>
 		<div class="Options">
 			<p>Set Game Options</p>
+			<asp:TextBox id="MaxBox" CssClass="MaxBox" runat="server"/>
+			<asp:Button id="MaxButton" CssClass="MaxButton" Text="Confirm" runat="server" OnClick="SetMax"/>
 		</div>
 		<div class="Start">
 			<a href="Lobby.aspx" class="StartButton">Start Lobby</a>

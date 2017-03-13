@@ -13,6 +13,9 @@ namespace Krypton
 			max = int.Parse(MaxBox.Text);
 
 			Session["maxNumber"] = max;
-		}	
+		}
+		public void InitSetMax(object sender, EventArgs args) {
+			Session["maxNumber"] = max;
+		}
 	}
 }

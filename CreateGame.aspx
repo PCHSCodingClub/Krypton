@@ -58,8 +58,8 @@
 		</div>
 		<div class="Options">
 			<p>Set Game Options</p>
-			<asp:TextBox id="MaxBox" CssClass="MaxBox" runat="server"/>
-			<asp:Button id="MaxButton" CssClass="MaxButton" Text="Confirm" runat="server" OnClick="SetMax"/>
+			<asp:Label id = "MaxLabel" CssClass="MaxLabel" Text="Max card size:" runat="server"/>
+			<asp:TextBox id="MaxBox" CssClass="MaxBox" runat="server" OnInit="SetMax" OnTextChanged="SetMax"/>
 		</div>
 		<div class="Start">
 			<a href="Lobby.aspx" class="StartButton">Start Lobby</a>

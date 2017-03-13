@@ -19,7 +19,7 @@ namespace Krypton
 		{
 			for (int i = 0; i < cards.Length; i++)					//makes a random number for each card
 			{
-				cards[i] = (1 + rand.Next(24));
+				cards[i] = (1 + rand.Next((int) Session["maxNumber"]));
 			}
 			card1.Text = cards[0].ToString();						//puts the cards onto the page.
 			card2.Text = cards[1].ToString();
@@ -88,7 +88,7 @@ namespace Krypton
 
 		public bool containsNumber(string big, string small) {
 			if (big.Contains(small)) {
-				int s = big.IndexOf(small) - 1;
+				int s = big.IndexOf(small, StringComparison.Ordinal) - 1;
 				int e = s + small.Length;
 
 				if (!isNumber(big.Substring(s, s + 1)) && !isNumber(big.Substring(s, e + 1))){

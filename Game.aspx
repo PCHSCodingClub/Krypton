@@ -25,6 +25,19 @@
 				color: #0000AF;
 				font-size: 72px;
 			}
+			.Sketchpad{
+				font-size: 20px;
+				color: lavender;
+				border-color: #0000AF;
+				border-width: 4px;
+				border-radius: 10px;
+				background-color: #6666FF;
+				position: absolute;
+				width: 80%;
+				height: 30%;
+				bottom: 64%;
+				left: 10%;
+			}
 			div.problemCards{
 				font-weight: bold;
 				position: absolute;
@@ -33,6 +46,7 @@
 				width: 40%;
 				height: 35%;
 				left: 8%;
+				bottom: 25%;
 			}
 			div.finalCard{
 				font-weight: bold;
@@ -42,6 +56,7 @@
 				width: 40%;
 				height: 35%;
 				right: 8%;
+				bottom: 25%;
 			}
 			div.card{
 				color: lavender;
@@ -101,7 +116,7 @@
 <body>
 	<form id="form1" runat="server">
 		<div class = "content">
-			<p class = "header"><strong>Welcome to Krypton</strong></p>
+			<!--- <p class = "header"><strong>Welcome to Krypton</strong></p> !-->
 			<div class = "problemCards">
 				<p>Arrange these numbers</p>
 				<div class = "card">
@@ -123,12 +138,15 @@
 			<div class="Clock">
 				<p>Elapsed Time</p>
 			</div>
-			<div class="Points">
-				<p>Score</p>
+			<div class="Points" cssClass="Points" runat="server" id="Points">
+				<p class="Score" cssClass="Score" runat="server" id="Score">Score</p>
 			</div>
 			<div class="Rounds">
 				<p>10/15</p>
 			</div>
+			<asp:TextBox class="Sketchpad" runat="server" CssClass="Sketchpad" id="Sketchpad">
+					SketchPad
+			</asp:TextBox>
 			<div class = "finalCard">
 				<p>To equal this number</p>
 				<div class = "card">

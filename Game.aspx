@@ -78,6 +78,24 @@
 				left: 60%;
 				width: 10%;
 			}
+			div.Clock{
+				position: absolute;
+				bottom: 8%;
+				left: 6%;
+				width: 10%;
+			}
+			div.Points{
+				position: absolute;
+				bottom: 8%;
+				left: 45%;
+				width: 10%;
+			}
+			div.Rounds{
+				position: absolute;
+				bottom: 8%;
+				left: 85.7%;
+				width:10%
+			}
 	</style>
 </head>
 <body>
@@ -101,6 +119,15 @@
 				<div class = "card">
 					<asp:Label id = "card5" runat="server" CssClass = "card"/>
 				</div>
+			</div>
+			<div class="Clock">
+				<p>Elapsed Time</p>
+			</div>
+			<div class="Points">
+				<p>Score</p>
+			</div>
+			<div class="Rounds">
+				<p>10/15</p>
 			</div>
 			<div class = "finalCard">
 				<p>To equal this number</p>

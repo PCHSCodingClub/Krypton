@@ -77,27 +77,19 @@ namespace Krypton {
 
 		public bool containsNumber(string big, string small) {									//checks if a string contains another string
 			if (big.Contains(small)) {															//does it contain the string AND is it not surrounded by another string (2150 != 15)
-				int s = big.IndexOf(small, StringComparison.Ordinal);						//start of the small string in big string
-				int e = s + small.Length;														//end of the small string in the big string
+				int s = big.IndexOf(small, StringComparison.Ordinal)-1;						//start of the small string in big string
+				int e = s + small.Length+1;														//end of the small string in the big string
 
-				if (!isNumber(big.Substring(s,1)) && !isNumber(big.Substring(e, 1))) {			//are the edges not numbers?
+				if (!isNumber(big[s]) && !isNumber(big[e])) {			//are the edges not numbers?
 					return true;																//Yay! our number is alone
 				}
 			}
 			return false;																		//else: woops, not right!
 		}
 
-		public bool isNumber(String s) {
-			if (s.Length != 1) {
-				return false;
-			}
-			char[] ch = s.ToCharArray();
-			for (int i = 0; i < ch.Length; i++)
-			{
-				if (ch[i] == '0' || ch[i] == '1' || ch[i] == '2' || ch[i] == '3' || ch[i] == '4' || ch[i] == '5' || ch[i] == '6' || ch[i] == '7' || ch[i] == '8' || ch[i] == '9')
-				{
-					return true;
-				}
+		public bool isNumber(char c) {
+			if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9'){
+				return true;
 			}
 			return false;
 		}

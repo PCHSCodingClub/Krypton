@@ -1,3 +1,4 @@
+
 using System;
 using System.Web;
 using System.Web.UI;
@@ -14,6 +15,8 @@ namespace Krypton
 
 			Session["ScoreTotal"] = 0;
 			Session["maxNumber"] = max;
+			Session["maxRounds"] = 10;
+			Session["currentRounds"] = 0;
 		}	
 	}
 }

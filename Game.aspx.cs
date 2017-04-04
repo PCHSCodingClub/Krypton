@@ -14,8 +14,8 @@ namespace Krypton {
 		int computedAnswer;							//the computed answer
 
 		public void generateCards(object sender, EventArgs args) {		//randomly generates 
-			for (int i = 0; i < cards.Length; i++) {					//makes a random number for each card
-				cards[i] = (1 + rand.Next((int) Session["maxNumber"]));
+			for (int i = 0; i < cards.Length; i++) {                    //makes a random number for each card
+				cards[i] = (1 + rand.Next(12));//(int) Session["maxNumber"]));
 			}
 			card1.Text = cards[0].ToString();							//puts the cards onto the page.
 			card2.Text = cards[1].ToString();
@@ -24,6 +24,7 @@ namespace Krypton {
 			card5.Text = cards[4].ToString();
 			card6.Text = cards[5].ToString();
 
+			label.Text = "";
 
 			ViewState.Add("canGetCards", true);									//allows points to be obtained again.
 			ViewState.Add("cards", cards);										//stores data
@@ -76,10 +77,10 @@ namespace Krypton {
 
 		public bool containsNumber(string big, string small) {									//checks if a string contains another string
 			if (big.Contains(small)) {															//does it contain the string AND is it not surrounded by another string (2150 != 15)
-				int s = big.IndexOf(small, StringComparison.Ordinal) - 1;						//start of the small string in big string
+				int s = big.IndexOf(small, StringComparison.Ordinal);						//start of the small string in big string
 				int e = s + small.Length;														//end of the small string in the big string
 
-				if (!isNumber(big.Substring(s,s+1)) && !isNumber(big.Substring(e, e + 1))) {	//are the edges not numbers?
+				if (!isNumber(big.Substring(s,1)) && !isNumber(big.Substring(e, 1))) {			//are the edges not numbers?
 					return true;																//Yay! our number is alone
 				}
 			}

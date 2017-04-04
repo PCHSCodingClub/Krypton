@@ -4,7 +4,7 @@ using System.Data;
 
 namespace Krypton {
 
-	public partial class Default : System.Web.UI.Page 	{
+	public partial class Game : System.Web.UI.Page 	{
 		DataTable dt = new DataTable();				//used to turn equations into ints
 		Random rand = new Random();					//generates random numbers
 

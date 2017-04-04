@@ -1,163 +1,106 @@
-<%@ Page Language="C#" Inherits="Krypton.Default" %>
-<!DOCTYPE html>
-<html>
-<head runat="server">
-	<title>Krypton</title>
-	<style>
-			body{
-				background-color: #DD0000;
-				height: 100%;
-				width: 100%;
-				padding: 0px;
-				margin: 0px;
+using System;
+using System.Collections;
+using System.Data;
+
+namespace Krypton
+{
+
+	public partial class Game : System.Web.UI.Page
+	{
+		DataTable dt = new DataTable();				//used to turn equations into ints
+		Random rand = new Random();					//generates random numbers
+
+		int[] cards = new int[6];					//stores the numbers used by cards
+
+		String answer;								//the computed answer as a string (used later)
+		int computedAnswer;							//the computed answer
+
+		public void generateCards(object sender, EventArgs args) {		//randomly generates 
+			for (int i = 0; i < cards.Length; i++) {					//makes a random number for each card
+				cards[i] = (1 + rand.Next((int) Session["maxNumber"]));
 			}
-			div.content{
-				position: absolute;
-				background-color:#FFFF88;
-				left: 5%;
-				top:5%;
-				width: 90%;
-				height: 90%;
-				text-align: center;
-				border-radius: 50px;
+			card1.Text = cards[0].ToString();							//puts the cards onto the page.
+			card2.Text = cards[1].ToString();
+			card3.Text = cards[2].ToString();
+			card4.Text = cards[3].ToString();
+			card5.Text = cards[4].ToString();
+			card6.Text = cards[5].ToString();
+
+
+			ViewState.Add("canGetCards", true);									//allows points to be obtained again.
+			ViewState.Add("cards", cards);										//stores data
+		}
+
+		public void checkCards(object sender, EventArgs ars) {					//checks if cards are right
+			answer = ("((((((("+ answerBox.Text + ")))))))");                             //finds what is in the box
+			int[] c = (int[])ViewState["cards"];								//gets the cards out of the view
+			int a = c[5];														//finds the answer card's value
+			try {
+				computedAnswer = (int)dt.Compute(answer, "");					//turns it into an int
 			}
-			p.header{
-				color: #0000AF;
-				font-size: 72px;
+			catch {
+				computedAnswer = -1;
 			}
-			.Sketchpad{
-				font-size: 20px;
-				color: lavender;
-				border-color: #0000AF;
-				border-width: 4px;
-				border-radius: 10px;
-				background-color: #6666FF;
-				position: absolute;
-				width: 80%;
-				height: 30%;
-				bottom: 64%;
-				left: 10%;
+			if ((Boolean)ViewState["canGetCards"]) {
+				if (computedAnswer == -1) {                             		//checks if answer is correct
+					label.Text = "ERROR INVALID ANSWER";
+				}
+				else if (computedAnswer != a) {
+					label.Text = "Answer Does not match";
+				}
+				else if (contains(answer, c)) {
+					label.Text = "Correct";
+					ViewState.Add("canGetCards", false);
+				}
+				else {
+					label.Text = "You did not use the cards correctly";
+				}
 			}
-			div.problemCards{
-				font-weight: bold;
-				position: absolute;
-				background-color: #8989FF;
-				font-size: 18px;
-				width: 40%;
-				height: 35%;
-				left: 8%;
-				bottom: 25%;
+			else {
+				label.Text = "Please Generate New Cards";
 			}
-			div.finalCard{
-				font-weight: bold;
-				position: absolute;
-				background-color: #8989FF;
-				font-size: 18px;
-				width: 40%;
-				height: 35%;
-				right: 8%;
-				bottom: 25%;
+		}
+
+		public bool contains(string a, int[] c) {		//checks if the answer contains all of the numbers
+			int length = (c.Length - 1); 				//length of the array minus two (one for the answer, one because arrays start at zero
+
+			for (int i = 0; i < length; i++) {			//goes through all cards
+				int n = c[i];							//get current card
+				if (containsNumber(a,n.ToString())) {	//does it contain the number
+					continue;							//yes?  great! keep checking
+				}
+				else {
+					return false;						//no?  :( end the check
+				}
 			}
-			div.card{
-				color: lavender;
-				background-color:#000033;
-				margin-bottom: 5px;
-				width: 60px;
-				margin-left: auto;
-				margin-right: auto;
+			return true;								//If you run through them all, your done, return true
+		}
+
+		public bool containsNumber(string big, string small) {									//checks if a string contains another string
+			if (big.Contains(small)) {															//does it contain the string AND is it not surrounded by another string (2150 != 15)
+				int s = big.IndexOf(small, StringComparison.Ordinal) - 1;						//start of the small string in big string
+				int e = s + small.Length;														//end of the small string in the big string
+
+				if (!isNumber(big.Substring(s,s+1)) && !isNumber(big.Substring(e, e + 1))) {	//are the edges not numbers?
+					return true;																//Yay! our number is alone
+				}
 			}
-			.newCardsButton{
-				position: absolute;
-				bottom: 1%;
-				left: 30%;
-				width: 10%;
+			return false;																		//else: woops, not right!
+		}
+
+		public bool isNumber(String s) {
+			if (s.Length != 1) {
+				return false;
 			}
-			.answerBox{
-				position: absolute;
-				bottom: 1%;
-				margin: auto;
-				left: 45%;
-				width: 10%;
+			char[] ch = s.ToCharArray();
+			for (int i = 0; i < ch.Length; i++)
+			{
+				if (ch[i] == '0' || ch[i] == '1' || ch[i] == '2' || ch[i] == '3' || ch[i] == '4' || ch[i] == '5' || ch[i] == '6' || ch[i] == '7' || ch[i] == '8' || ch[i] == '9')
+				{
+					return true;
+				}
 			}
-			.label{
-				position: absolute;
-				bottom: 15%;
-				margin: auto;
-				left: 45%;
-				width: 10%;
-			}
-			.checkCardsButton{
-				position: absolute;
-				bottom: 1%;
-				margin: auto;
-				left: 60%;
-				width: 10%;
-			}
-			div.Clock{
-				position: absolute;
-				bottom: 8%;
-				left: 6%;
-				width: 10%;
-			}
-			div.Points{
-				position: absolute;
-				bottom: 8%;
-				left: 45%;
-				width: 10%;
-			}
-			div.Rounds{
-				position: absolute;
-				bottom: 8%;
-				left: 85.7%;
-				width:10%
-			}
-	</style>
-</head>
-<body>
-	<form id="form1" runat="server">
-		<div class = "content">
-			<!--- <p class = "header"><strong>Welcome to Krypton</strong></p> !-->
-			<div class = "problemCards">
-				<p>Arrange these numbers</p>
-				<div class = "card">
-					<asp:Label id = "card1" runat="server" CssClass = "card"/>
-				</div>
-				<div class = "card">
-					<asp:Label id = "card2" runat="server" CssClass = "card"/>
-				</div>
-				<div class = "card">
-					<asp:Label id = "card3" runat="server" CssClass = "card"/>
-				</div>
-				<div class = "card">
-					<asp:Label id = "card4" runat="server" CssClass = "card"/>
-				</div>
-				<div class = "card">
-					<asp:Label id = "card5" runat="server" CssClass = "card"/>
-				</div>
-			</div>
-			<div class="Clock">
-				<p>Elapsed Time</p>
-			</div>
-			<div class="Points" cssClass="Points" runat="server" id="Points">
-				<p class="Score" cssClass="Score" runat="server" id="Score">Score</p>
-			</div>
-			<div class="Rounds">
-				<p>10/15</p>
-			</div>
-			<asp:TextBox class="Sketchpad" runat="server" CssClass="Sketchpad" id="Sketchpad">
-					SketchPad
-			</asp:TextBox>
-			<div class = "finalCard">
-				<p>To equal this number</p>
-				<div class = "card">
-					<asp:Label id = "card6" runat="server" CssClass = "card"/>
-				</div>
-			</div>
-			<asp:Label id = "label" runat="server"  CssClass="label" Text=""/>
-			<asp:Button id="newCardsButton" CssClass="newCardsButton" runat="server" Text="New Cards!" OnClick="generateCards" />
-			<asp:TextBox id="answerBox" CssClass="answerBox" runat="server"/>
-			<asp:Button id="checkCardsButton" CssClass="checkCardsButton" runat="server" Text = "Check Cards!" OnClick="checkCards"/>
-		</div>
-	</form>
-</body>
-</html>
+			return false;
+		}
+	}
+}

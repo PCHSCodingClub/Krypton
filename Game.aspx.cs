@@ -67,7 +67,7 @@ namespace Krypton {
 		public void checkCards(object sender, EventArgs ars) {					//checks if cards are right
 			answer = ("((((((("+ answerBox.Text + ")))))))");                             //finds what is in the box
 			int[] c = (int[])ViewState["cards"];								//gets the cards out of the view
-			int a = c[5];														//finds the answer card's value
+			int a = c[5];														//find2ws the answer card's value
 			try {
 				computedAnswer = (int)dt.Compute(answer, "");					//turns it into an int
 			}
@@ -81,7 +81,7 @@ namespace Krypton {
 				else if (computedAnswer != a) {
 					label.Text = "Answer Does not match";
 				}
-				else if (contains(answer, c)) {
+				else if (contains(answer, c) && addsWell(answer,c)) {
 					label.Text = "Correct";
 					ViewState.Add("canGetCards", false);
 				}
@@ -94,8 +94,25 @@ namespace Krypton {
 			}
 		}
 
+		public bool addsWell(string a, int[] c) {
+			int sum = 0;
+			string str = a;
+			for (int i = 0; i < (c.Length -1); i++) {
+				sum += c[i];
+			}
+			str = str.Replace('*', '+');
+			str = str.Replace('/', '+');
+			str = str.Replace('-', '+');
+			int check = (int)dt.Compute(str,"");
+			label.Text = check.ToString();
+			if (check == sum) {
+				return true;
+			}
+			return false;
+		}
+
 		public bool contains(string a, int[] c) {		//checks if the answer contains all of the numbers
-			int length = (c.Length - 2); 				//length of the array minus two (one for the answer, one because arrays start at zero
+			int length = (c.Length - 1); 				//length of the array minus two (one for the answer, one because arrays start at zero
 
 			for (int i = 0; i < length; i++) {			//goes through all cards
 				int n = c[i];							//get current card

@@ -21,13 +21,12 @@ namespace Krypton
 
 		public void generateCards(object sender, EventArgs args)
 		{
-			if ((int)Session["currentRounds"] > (int)Session["maxRounds"])
+			if ((int)Session["currentRounds"] > (int)Session["maxRounds"]) //Check if round limit is reached.
 				{
 				RoundMax.Text = "fIN";
 				}
-			else
+			else //Update Round Counters
 				{
-				//Update Round Counter
 				maxRound = (int)Session["maxRounds"];
 				RoundMax.Text = maxRound.ToString();
 	
@@ -122,7 +121,7 @@ namespace Krypton
 					label.Text = "Correct";
 					ViewState.Add("canGetCards", false);
 
-					pointTotal = (int)Session["ScoreTotal"];
+					pointTotal = (int)Session["ScoreTotal"]; //Updates point total
 					pointTotal = pointTotal++;
 					Score.Text = pointTotal++.ToString();
 					Session["ScoreTotal"] = pointTotal;

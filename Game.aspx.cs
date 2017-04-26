@@ -16,13 +16,31 @@ namespace Krypton
 		int computedAnswer;                         //the computed answer
 
 		int pointTotal;                         //Used to save actual pointTotal
-		int roundNumber = 0;                        //Used to save actual Current Round
+		int roundNumber;                    //Used to save actual Current Round
+		int maxRound;
 
 		public void generateCards(object sender, EventArgs args)
-		{      //randomly generates 
+		{
+			if ((int)Session["currentRounds"] > (int)Session["maxRounds"])
+				{
+				RoundMax.Text = "fIN";
+				}
+			else
+				{
+				//Update Round Counter
+				maxRound = (int)Session["maxRounds"];
+				RoundMax.Text = maxRound.ToString();
+	
+				roundNumber = (int)Session["currentRounds"];
+				roundNumber = roundNumber++;
+				RoundCurrent.Text = roundNumber++.ToString();
+				Session["currentRounds"] = roundNumber++;
+				}
+
+			//randomly generates 
 			int[] r = new int[6];
 			for (int i = 0; i < cards.Length; i++)
-			{                    //makes a random number for each card
+			{            //makes a random number for each card
 				do
 				{
 					r[i] = (1 + rand.Next(52));

@@ -61,7 +61,7 @@
 		</div>
 		<div class="Options">
 			<p>Set Game Options</p>
-			<asp:Label id = "MaxLabel" CssClass="MaxLabel" Text="Max card size:" runat="server"/>
+			<asp:Label id = "MaxLabel" CssClass="MaxLabel" Text="Rounds:" runat="server"/>
 			<asp:TextBox id="MaxBox" CssClass="MaxBox" runat="server"/>
 			<asp:Button id="MaxButton" CssClass="MaxButton" Text="Confirm" runat="server" OnClick="SetMax"/>
 		</div>

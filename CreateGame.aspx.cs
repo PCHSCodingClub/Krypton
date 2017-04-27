@@ -10,12 +10,11 @@ namespace Krypton
 
 		public void SetMax(object sender, EventArgs args) //Button Will be turned into max rounds
 		{
-			//max = int.Parse(MaxBox.Text);
+			max = int.Parse(MaxBox.Text);
 
 			Session["ScoreTotal"] = 1;
-			//Session["maxNumber"] = max;
-			Session["maxRounds"] = 10;
-			Session["currentRounds"] = 0;
+			Session["maxRounds"] = max;
+			Session["currentRounds"] = 1;
 		}	
 	}
 }

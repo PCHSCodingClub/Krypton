@@ -5,6 +5,12 @@ namespace Krypton
 {
 	public partial class CreateGame : System.Web.UI.Page
 	{
+		protected override void OnLoad(EventArgs e)
+		{
+			Session["ScoreTotal"] = 1;
+			Session["maxRounds"] = 10;
+			Session["currentRounds"] = 1;
+		}
 
 		public int max = 24;
 
@@ -12,9 +18,7 @@ namespace Krypton
 		{
 			max = int.Parse(MaxBox.Text);
 
-			Session["ScoreTotal"] = 1;
 			Session["maxRounds"] = max;
-			Session["currentRounds"] = 1;
 		}	
 	}
 }

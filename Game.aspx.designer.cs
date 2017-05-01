@@ -14,6 +14,14 @@ namespace Krypton {
 	public partial class Game {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm form1;
+
+		protected System.Web.UI.WebControls.Label Time;
+
+		protected System.Web.UI.WebControls.Label Score;
+
+		protected System.Web.UI.WebControls.Label RoundCurrent;
+
+		protected System.Web.UI.WebControls.Label RoundMax;
 		
 		protected System.Web.UI.WebControls.Label card1;
 		
